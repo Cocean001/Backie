@@ -1,0 +1,23 @@
+# Environment files and credentials
+.env
+.env.*
+*.env
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*
+*secret*
+
+# Local tooling and operating-system files
+.DS_Store
+*.log
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+.wrangler/
+.dev.vars
+coverage/
