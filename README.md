@@ -15,6 +15,14 @@ Backie is a small browser tool for making animated, diffused gradient background
 
 Your current settings are kept in the URL, so a design can be bookmarked or shared as a link. Backie runs entirely in the browser and does not require an account or API key.
 
+## Features
+
+- Animated diffused gradient canvas with still, calm, flowing, and chaotic motion styles
+- Presets for aurora, pearl, ocean, velvet, glass, matcha, sunset, and lavender looks
+- Fine control over colours, blur, bloom, opacity, blend mode, and composition
+- Locked colours, random palettes, undo history, fullscreen mode, and pause control
+- Copyable CSS and React output for using a finished background in another project
+
 Keyboard shortcuts: `Space` pauses or resumes the animation, `R` creates a new palette, and `Esc` closes the active panel.
 
 ## Development
