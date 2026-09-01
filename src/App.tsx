@@ -609,7 +609,7 @@ ${getMotionKeyframes()}
                   {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
                   <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-sm px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none dyn-panel shadow-lg border dyn-border font-medium">{isPaused ? 'Play (Space)' : 'Pause (Space)'}</span>
                 </motion.button>
-              <motion.a href="https://github.com" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} transition={{ delay: 0.3 }} className="p-3 backdrop-blur-xl rounded-full transition-all cursor-pointer group relative hover:scale-105 active:scale-95 dyn-panel dyn-panel-hover border dyn-border shadow-md">
+              <motion.a href="https://github.com/Cocean001/Backie" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} transition={{ delay: 0.3 }} className="p-3 backdrop-blur-xl rounded-full transition-all cursor-pointer group relative hover:scale-105 active:scale-95 dyn-panel dyn-panel-hover border dyn-border shadow-md">
                   <Github className="w-5 h-5" />
                   <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-sm px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none dyn-panel shadow-lg border dyn-border font-medium">GitHub Repository</span>
                 </motion.a>
