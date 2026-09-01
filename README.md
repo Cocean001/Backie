@@ -1,5 +1,7 @@
 # Backie
 
+[中文说明](README.zh-CN.md)
+
 Backie is a small browser tool for making animated, diffused gradient backgrounds.
 
 **[Open Backie](https://backie.acroonic.com/)**
