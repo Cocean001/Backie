@@ -703,10 +703,10 @@ ${getMotionKeyframes()}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: '100%', opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute top-4 right-4 bottom-4 w-[calc(100%-2rem)] md:w-[440px] rounded-[2.5rem] backdrop-blur-3xl shadow-2xl border flex flex-col pointer-events-auto z-50 transition-colors dyn-panel dyn-border overflow-hidden"
+              className="absolute top-4 right-4 bottom-4 w-[calc(100%-2rem)] md:w-[480px] rounded-[2rem] backdrop-blur-3xl shadow-2xl border flex flex-col pointer-events-auto z-50 transition-colors dyn-panel dyn-border overflow-hidden"
             >
-              <div className="flex items-center justify-between px-8 py-6 border-b shrink-0 dyn-border">
-                <h2 className="text-lg font-medium flex items-center gap-2.5 dyn-text">
+              <div className="flex items-center justify-between px-6 py-5 border-b shrink-0 dyn-border">
+                <h2 className="text-base font-semibold flex items-center gap-2.5 dyn-text">
                   {activeTab === 'explore' && <><LayoutGrid className="w-5 h-5 text-indigo-500" /> Explore Presets</>}
                   {activeTab === 'customise' && <><Settings2 className="w-5 h-5 text-teal-500" /> Customise</>}
                   {activeTab === 'export' && <><Code2 className="w-5 h-5 text-blue-500" /> Export</>}
@@ -716,34 +716,51 @@ ${getMotionKeyframes()}
                 </button>
               </div>
               
-              <div className="flex-1 overflow-y-auto p-8 scrollbar-none space-y-8">
+              <div className="flex-1 overflow-y-auto p-6 scrollbar-none space-y-8">
                 {activeTab === 'explore' && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-5">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-medium dyn-text">Start with a direction</p>
+                        <p className="mt-1 text-xs leading-relaxed dyn-text-muted">Pick a base, then fine-tune the movement and colour below.</p>
+                      </div>
+                      <span className="shrink-0 text-[11px] font-medium tabular-nums dyn-text-muted">{PRESETS.length} options</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
                     {PRESETS.map((preset) => (
+                      (() => {
+                        const isActive = config.baseBg === preset.config.baseBg && config.motionStyle === preset.config.motionStyle && config.composition === preset.config.composition;
+                        return (
                       <button
                         key={preset.id}
                         onClick={() => applyPreset(preset.config)}
-                        className="group relative flex flex-col items-center w-full rounded-3xl overflow-hidden transition-all duration-500 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/30 cursor-pointer text-left bg-white/5 dark:bg-black/20 shadow-sm hover:shadow-xl hover:-translate-y-1"
+                        aria-pressed={isActive}
+                        className={`group relative flex flex-col w-full overflow-hidden rounded-2xl border text-left transition-all duration-300 cursor-pointer ${isActive ? 'border-indigo-500/70 ring-2 ring-indigo-500/20' : 'border-black/10 dark:border-white/10 hover:border-black/25 dark:hover:border-white/25'} bg-white/10 dark:bg-black/15 shadow-sm hover:-translate-y-0.5 hover:shadow-lg`}
                       >
-                        <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundColor: preset.config.baseBg }}>
-                          <div className="absolute inset-0 opacity-80 mix-blend-screen scale-125" style={{
-                            filter: 'blur(20px)',
+                        <div className="relative aspect-[1.35] w-full overflow-hidden" style={{ backgroundColor: preset.config.baseBg }}>
+                          <div className="absolute -inset-8 opacity-90 mix-blend-screen transition-transform duration-700 group-hover:scale-110" style={{
+                            filter: 'blur(24px) saturate(1.1)',
                             background: `
-                              radial-gradient(circle at 20% 30%, ${preset.config.blobColors[0] || 'transparent'} 0%, transparent 60%),
-                              radial-gradient(circle at 80% 70%, ${preset.config.blobColors[1] || 'transparent'} 0%, transparent 60%),
-                              radial-gradient(circle at 50% 50%, ${preset.config.blobColors[2] || 'transparent'} 0%, transparent 60%)
+                              radial-gradient(circle at 18% 32%, ${preset.config.blobColors[0] || 'transparent'} 0%, transparent 58%),
+                              radial-gradient(circle at 82% 68%, ${preset.config.blobColors[1] || 'transparent'} 0%, transparent 58%),
+                              radial-gradient(circle at 52% 52%, ${preset.config.blobColors[2] || 'transparent'} 0%, transparent 56%)
                             `
                           }} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10" />
+                          {isActive && <span className="absolute left-3 top-3 rounded-full bg-white/85 px-2 py-1 text-[10px] font-semibold text-slate-900 shadow-sm">Current</span>}
                         </div>
-                        
-                        {/* Elegant floating label */}
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] py-2 px-3 rounded-xl bg-white/70 dark:bg-black/50 backdrop-blur-md border border-black/5 dark:border-white/10 transition-transform duration-300">
-                          <span className="text-xs font-medium block text-center truncate text-black/80 dark:text-white/90">
-                            {preset.name}
+                        <div className="flex items-center justify-between gap-2 px-3 py-3">
+                          <span className="min-w-0 truncate text-xs font-semibold dyn-text">{preset.name}</span>
+                          <span className="flex shrink-0 items-center gap-1">
+                            {preset.config.blobColors.slice(0, 3).map((color) => <span key={color} className="h-2.5 w-2.5 rounded-full border border-white/50" style={{ backgroundColor: color }} />)}
                           </span>
                         </div>
                       </button>
+                        );
+                      })()
                     ))}
+                    </div>
                   </div>
                 )}
 
